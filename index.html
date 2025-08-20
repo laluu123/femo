@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text ↔ Binary Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Text ↔ Binary Converter</h2>
+
+  <label>Enter Text:</label>
+  <textarea id="textInput" placeholder="Type something..."></textarea>
+
+  <label>Binary Output:</label>
+  <textarea id="binaryOutput" readonly></textarea>
+
+  <br>
+
+  <button onclick="convertToBinary()">Text ➤ Binary</button>
+  <button onclick="convertToText()">Binary ➤ Text</button>
+
+  <script>
+    function convertToBinary() {
+      const text = document.getElementById("textInput").value;
+      let binary = "";
+      for (let i = 0; i < text.length; i++) {
+        binary += text.charCodeAt(i).toString(2).padStart(8, '0') + " ";
+      }
+      document.getElementById("binaryOutput").value = binary.trim();
+    }
+
+    function convertToText() {
+      const binary = document.getElementById("binaryOutput").value.trim();
+      const binaryArray = binary.split(" ");
+      let text = "";
+      for (let bin of binaryArray) {
+        text += String.fromCharCode(parseInt(bin, 2));
+      }
+      document.getElementById("textInput").value = text;
+    }
+  </script>
+
+</body>
+</html>
